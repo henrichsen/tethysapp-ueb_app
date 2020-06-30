@@ -4,12 +4,10 @@ from setuptools import setup, find_packages
 from tethys_apps.app_installation import custom_develop_command, custom_install_command
 from setuptools import setup, find_namespace_packages
 from tethys_apps.app_installation import find_resource_files
-
+from setuptools import setup, find_namespace_packages
 ### Apps Definition ###
 app_package = 'ueb_app'
 release_package = 'tethysapp-' + app_package
-app_class = 'ueb_app.app:UebApp'
-app_package_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tethysapp', app_package)
 
 ### Python Dependencies ###
 dependencies = []
@@ -30,12 +28,8 @@ setup(
     license='',
     packages=find_namespace_packages(),
     package_data={'': resource_files},
-    namespace_packages=['tethysapp', 'tethysapp.' + app_package],
     include_package_data=True,
     zip_safe=False,
     install_requires=dependencies,
-    cmdclass={
-        'install': custom_install_command(app_package, app_package_dir, dependencies),
-        'develop': custom_develop_command(app_package, app_package_dir, dependencies)
-    }
+
 )
