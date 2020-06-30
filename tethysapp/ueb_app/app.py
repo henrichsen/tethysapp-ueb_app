@@ -15,6 +15,7 @@ class UebApp(TethysAppBase):
     description = 'UEB APP description'
     enable_feedback = False
     feedback_emails = []
+    tags = ''
 
         
     def url_maps(self):

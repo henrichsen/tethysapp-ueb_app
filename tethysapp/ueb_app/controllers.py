@@ -17,6 +17,9 @@ from model_run_utils import *
 from model_input_utils import *
 from user_settings import *
 
+from tethys_sdk.permissions import login_required
+
+
 
 # home page views
 @login_required()
