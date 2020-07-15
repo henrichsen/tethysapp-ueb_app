@@ -4,7 +4,7 @@ from oauthlib.oauth2 import TokenExpiredError
 from datetime import datetime
 
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -12,10 +12,10 @@ from tethys_sdk.gizmos import TextInput, SelectInput,DatePicker, GoogleMapView
 
 from hs_restclient import HydroShare, HydroShareAuthOAuth2, HydroShareNotAuthorized, HydroShareNotFound
 
-from epsg_list import EPSG_List
-from model_run_utils import *
-from model_input_utils import *
-from user_settings import *
+from .epsg_list import EPSG_List
+from .model_run_utils import *
+from .model_input_utils import *
+#from .user_settings import *
 
 from tethys_sdk.permissions import login_required
 
