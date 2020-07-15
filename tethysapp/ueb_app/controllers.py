@@ -269,17 +269,28 @@ def model_run(request):
         if res_id:
             initial = [option[0] for option in hs_editable_res_name_list if option[1] == res_id]
         else:
-            initial = [hs_editable_res_name_list[0][0]]
-            res_id = hs_editable_res_name_list[0][1]
+            if hs_editable_res_name_list:  # when there is model instance resource
+                initial = [hs_editable_res_name_list[0][0]]
+                res_id = hs_editable_res_name_list[0][1]
+            else:  # when there is no model instance resource
+                initial = ['No model instance resource']
 
-        options = hs_editable_res_name_list if hs_editable_res_name_list else [('No model instance resource is available', '')]
+        options = hs_editable_res_name_list if hs_editable_res_name_list else [('No model instance resource', '')]
 
         # get the resource metadata
-        model_resource_metadata = get_model_resource_metadata(hs, res_id)
+        if res_id:
+            model_resource_metadata = get_model_resource_metadata(hs, res_id)
+        else:
+            model_resource_metadata = dict.fromkeys(
+            ['north_lat', 'south_lat', 'east_lon', 'west_lon', 'start_time', 'end_time', 'outlet_x', 'outlet_y',
+             'epsg_code', 'cell_x_size', 'cell_y_size'], None)
 
     except Exception:
         options = [('Failed to retrieve the model instance resources list', '')]
         initial = ['Failed to retrieve the model instance resources list']
+        model_resource_metadata = dict.fromkeys(
+            ['north_lat', 'south_lat', 'east_lon', 'west_lon', 'start_time', 'end_time', 'outlet_x', 'outlet_y',
+             'epsg_code', 'cell_x_size', 'cell_y_size'], None)
 
     finally:
         # resource list
