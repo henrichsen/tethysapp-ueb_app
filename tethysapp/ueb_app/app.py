@@ -52,7 +52,7 @@ class UebApp(TethysAppBase):
                     # url for help
                     UrlMap(name='help_page',
                            url='ueb-app/help',
-                           controller='ueb_app.controllers.help'),
+                           controller='ueb_app.controllers.help_page'),
 
                     # testing url
                     UrlMap(name='test',
