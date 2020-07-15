@@ -12,10 +12,13 @@ from tethys_sdk.gizmos import TextInput, SelectInput,DatePicker, GoogleMapView
 
 from hs_restclient import HydroShare, HydroShareAuthOAuth2, HydroShareNotAuthorized, HydroShareNotFound
 
-from epsg_list import EPSG_List
-from model_run_utils import *
-from model_input_utils import *
-from user_settings import *
+
+from .epsg_list import EPSG_List
+from .model_run_utils import *
+from .model_input_utils import *
+#from .user_settings import *
+
+from tethys_sdk.permissions import login_required
 
 
 # home page views
@@ -267,17 +270,28 @@ def model_run(request):
         if res_id:
             initial = [option[0] for option in hs_editable_res_name_list if option[1] == res_id]
         else:
-            initial = [hs_editable_res_name_list[0][0]]
-            res_id = hs_editable_res_name_list[0][1]
+            if hs_editable_res_name_list:  # when there is model instance resource
+                initial = [hs_editable_res_name_list[0][0]]
+                res_id = hs_editable_res_name_list[0][1]
+            else:  # when there is no model instance resource
+                initial = ['No model instance resource']
 
-        options = hs_editable_res_name_list if hs_editable_res_name_list else [('No model instance resource is available', '')]
+        options = hs_editable_res_name_list if hs_editable_res_name_list else [('No model instance resource', '')]
 
         # get the resource metadata
-        model_resource_metadata = get_model_resource_metadata(hs, res_id)
+        if res_id:
+            model_resource_metadata = get_model_resource_metadata(hs, res_id)
+        else:
+            model_resource_metadata = dict.fromkeys(
+            ['north_lat', 'south_lat', 'east_lon', 'west_lon', 'start_time', 'end_time', 'outlet_x', 'outlet_y',
+             'epsg_code', 'cell_x_size', 'cell_y_size'], None)
 
     except Exception:
         options = [('Failed to retrieve the model instance resources list', '')]
         initial = ['Failed to retrieve the model instance resources list']
+        model_resource_metadata = dict.fromkeys(
+            ['north_lat', 'south_lat', 'east_lon', 'west_lon', 'start_time', 'end_time', 'outlet_x', 'outlet_y',
+             'epsg_code', 'cell_x_size', 'cell_y_size'], None)
 
     finally:
         # resource list
@@ -337,7 +351,7 @@ def check_status(request):
                        name='job_id',
                        placeholder='Enter the Job ID Here',
                        attributes={'required': True, 'style': 'width:800px;height:41px'}
-                          )
+                       )
     OAuthHS = get_OAuthHS(request)
     job_list, job_check_status = get_job_status_list(hs_username=OAuthHS['user_name'])
 
@@ -386,9 +400,7 @@ def get_job_status_list(hs_username):
 def help_page(request):
     # res_id
     res_id = request.GET.get('res_id', None)
-
-    context = {'res_id': res_id,}
-
+    context = {'res_id': res_id}
     return render(request, 'ueb_app/help.html', context)
 
 
