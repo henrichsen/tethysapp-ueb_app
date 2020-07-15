@@ -4,7 +4,7 @@ from oauthlib.oauth2 import TokenExpiredError
 from datetime import datetime
 
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -330,7 +330,7 @@ def model_run_submit_execution(request):
 
 
 # check status views and ajax submit
-@login_required
+@login_required()
 def check_status(request):
     # res_id
     res_id = request.GET.get('res_id', None)
@@ -385,7 +385,7 @@ def get_job_status_list(hs_username):
 
 
 # help views
-@login_required
+@login_required()
 def help_page(request):
     # res_id
     res_id = request.GET.get('res_id', None)
