@@ -12,13 +12,10 @@ from tethys_sdk.gizmos import TextInput, SelectInput,DatePicker, GoogleMapView
 
 from hs_restclient import HydroShare, HydroShareAuthOAuth2, HydroShareNotAuthorized, HydroShareNotFound
 
-from .epsg_list import EPSG_List
-from .model_run_utils import *
-from .model_input_utils import *
-#from user_settings import *
-
-from tethys_sdk.permissions import login_required
-
+from epsg_list import EPSG_List
+from model_run_utils import *
+from model_input_utils import *
+from user_settings import *
 
 
 # home page views
