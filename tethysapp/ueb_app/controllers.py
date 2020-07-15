@@ -20,7 +20,6 @@ from user_settings import *
 from tethys_sdk.permissions import login_required
 
 
-
 # home page views
 @login_required()
 def home(request):
@@ -330,7 +329,7 @@ def model_run_submit_execution(request):
 
 
 # check status views and ajax submit
-@login_required
+@login_required()
 def check_status(request):
     # res_id
     res_id = request.GET.get('res_id', None)
@@ -340,7 +339,7 @@ def check_status(request):
                        name='job_id',
                        placeholder='Enter the Job ID Here',
                        attributes={'required': True, 'style': 'width:800px;height:41px'}
-                          )
+                       )
     OAuthHS = get_OAuthHS(request)
     job_list, job_check_status = get_job_status_list(hs_username=OAuthHS['user_name'])
 
@@ -385,13 +384,11 @@ def get_job_status_list(hs_username):
 
 
 # help views
-@login_required
+@login_required()
 def help_page(request):
     # res_id
     res_id = request.GET.get('res_id', None)
-
-    context = {'res_id': res_id,}
-
+    context = {'res_id': res_id}
     return render(request, 'ueb_app/help.html', context)
 
 

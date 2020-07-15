@@ -1,5 +1,4 @@
 setup.py
-tethysapp/__init__.py
 tethysapp/ueb_app/__init__.py
 tethysapp/ueb_app/app.py
 tethysapp/ueb_app/controllers.py
