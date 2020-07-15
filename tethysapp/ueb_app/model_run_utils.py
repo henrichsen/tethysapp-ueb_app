@@ -11,10 +11,10 @@ import datetime
 import json
 import xmltodict
 import requests
-#from user_settings import *
+from user_settings import *
 
-from .hydrogate import HydroDS
-from .model_parameters_list import site_initial_variable_codes, input_vairable_codes
+from hydrogate import HydroDS
+from model_parameters_list import site_initial_variable_codes, input_vairable_codes
 
 
 # utils for loading the metadata
