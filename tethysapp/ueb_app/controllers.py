@@ -373,7 +373,7 @@ def get_job_status_list(hs_username):
             'extra_data': 'HydroShare: ' + hs_username
         }
 
-        response = requests.get(url, params=payload,auth=auth)
+        response = requests.get(url, params=payload, auth=auth)
 
         if response.status_code == 200:
             result = json.loads(response.text)

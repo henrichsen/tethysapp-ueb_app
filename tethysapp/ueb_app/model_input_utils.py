@@ -207,7 +207,7 @@ def validate_model_input_form(request):
 
 
     # get hydroshare oauth object
-    from controllers import get_OAuthHS
+    from .controllers import get_OAuthHS
     OAuthHS = get_OAuthHS(request)
     if OAuthHS.get('error'):
         validation['is_valid'] = False
