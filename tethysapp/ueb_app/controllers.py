@@ -286,7 +286,8 @@ def model_run(request):
             ['north_lat', 'south_lat', 'east_lon', 'west_lon', 'start_time', 'end_time', 'outlet_x', 'outlet_y',
              'epsg_code', 'cell_x_size', 'cell_y_size'], None)
 
-    except Exception:
+    except Exception as e:
+        print(e)
         options = [('Failed to retrieve the model instance resources list', '')]
         initial = ['Failed to retrieve the model instance resources list']
         model_resource_metadata = dict.fromkeys(

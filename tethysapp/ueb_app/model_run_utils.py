@@ -30,7 +30,7 @@ def get_model_resource_metadata(hs, res_id):
     try:
 
         # get metadata xml file and parse as dict
-        md_dict = xmltodict.parse(hs.getScienceMetadataRDF(res_id)) #error is str but expects xml like
+        md_dict = xmltodict.parse(hs.getScienceMetadataRDF(res_id).strip("bln' \\ ")) #remove single quotes and trailing \n
 
 
         # retrieve bounding box and time
@@ -65,7 +65,7 @@ def get_model_resource_metadata(hs, res_id):
         for item in ext_dict:
             key = item['rdf:Description']['hsterms:key'].replace(' ', '_').lower()
             info_dict[key] = item['rdf:Description']['hsterms:value']
-        model_resource_metadata['cell_y_size']= info_dict.get('modeling_resolution_dy_(m)')
+        model_resource_metadata['cell_y_size'] = info_dict.get('modeling_resolution_dy_(m)')
         model_resource_metadata['cell_x_size'] = info_dict.get('modeling_resolution_dx_(m)')
         model_resource_metadata['outlet_x'] = info_dict.get('outlet_longitude')
         model_resource_metadata['outlet_y'] = info_dict.get('outlet_latitude')
