@@ -11,7 +11,7 @@ import datetime
 import json
 import xmltodict
 import requests
-#from .user_settings import *
+from .user_settings import *
 
 from .hydrogate import HydroDS
 from .model_parameters_list import site_initial_variable_codes, input_vairable_codes
@@ -30,7 +30,7 @@ def get_model_resource_metadata(hs, res_id):
     try:
 
         # get metadata xml file and parse as dict
-        md_dict = xmltodict.parse(hs.getScienceMetadataRDF(res_id))
+        md_dict = xmltodict.parse(hs.getScienceMetadataRDF(res_id)) #error is str but expects xml like
 
 
         # retrieve bounding box and time

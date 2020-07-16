@@ -3,7 +3,7 @@ from datetime import datetime
 import tempfile
 import os
 import requests,json
-#from user_settings import *
+from user_settings import *
 
 from .hydrogate import HydroDS
 from .model_parameters_list import file_contents_dict

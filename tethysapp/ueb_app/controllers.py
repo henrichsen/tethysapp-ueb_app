@@ -16,7 +16,7 @@ from hs_restclient import HydroShare, HydroShareAuthOAuth2, HydroShareNotAuthori
 from .epsg_list import EPSG_List
 from .model_run_utils import *
 from .model_input_utils import *
-#from .user_settings import *
+from .user_settings import *
 
 from tethys_sdk.permissions import login_required
 
@@ -389,6 +389,7 @@ def get_job_status_list(hs_username):
             job_check_status = 'error'
 
     except Exception as e:
+        print(e)
         job_list = []
         job_check_status = 'error'
 
