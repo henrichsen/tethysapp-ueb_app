@@ -91,6 +91,9 @@
     display: block;
   }
 }
+  .settings-button{
+      visibility:hidden;
+  }
 
 @media screen and (max-width: 800px) {
   /*.topnav.responsive {position: relative;}*/
@@ -113,9 +116,7 @@
       right: 0;
 
   }
-  .settings-button{
-      visibility:hidden;
-  }
+
 
     }
 
