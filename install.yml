@@ -10,5 +10,18 @@ requirements:
   conda:
     channels:
     packages:
+      - oauthlib
+      - hs_restclient
+      - json
+      - pickle
+      - datetime
+      - time
+      - xmltodict
+      - requests
+      - shutil
+      - zipfile
+      - tempfile
+      - subprocess
+      - django
   pip:
 post:
